@@ -2,8 +2,8 @@
 
 import de.bezier.guido.*;
 //Declare and initialize NUM_ROWS and NUM_COLS = 20
-public static final int NUM_ROWS = 20;
-public static final int NUM_COLS = 20;
+public static final int NUM_ROWS = 5;
+public static final int NUM_COLS = 5;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs = new ArrayList <MSButton>(); //ArrayList of just the minesweeper buttons that are mined
 
@@ -13,7 +13,7 @@ void setup ()
     textAlign(CENTER,CENTER);
     
     // make the manager
-    MSButton[][] buttons = new MSButton[NUM_ROWS][NUM_COLS];
+    buttons = new MSButton[NUM_ROWS][NUM_COLS];
     Interactive.make( this );
     //your code to initialize buttons goes here
     for(int i = 0; i < NUM_ROWS; i++){
@@ -21,16 +21,15 @@ void setup ()
             buttons[i][j] = new MSButton(i,j);
         }
     }
-    
-    
     setBombs();
 }
 public void setBombs()
 {
-    private int randRow = (int)(Math.random()*NUM_ROWS);
-    private int randCol = (int)(Math.random()*NUM_COLS);
+    int randRow = (int)(Math.random()*NUM_ROWS);
+    int randCol = (int)(Math.random()*NUM_COLS);
     if(!bombs.contains(buttons[randRow][randCol])){
         bombs.add(buttons[randRow][randCol]);
+        System.out.println(randRow + ", " + randCol);
     }
 }
 
@@ -93,8 +92,8 @@ public class MSButton
     {    
         if (marked)
             fill(0);
-        // else if( clicked && bombs.contains(this) ) 
-        //     fill(255,0,0);
+        else if( clicked && bombs.contains(this) ) 
+            fill(255,0,0);
         else if(clicked)
             fill( 200 );
         else 
